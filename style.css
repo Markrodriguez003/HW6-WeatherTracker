@@ -1,5 +1,70 @@
-.weatherDataBlock{
-    padding-top: 36px;
-    padding-bottom: 136px;
-    margin-left: 2px; 
+#umbrella-logo {
+    width: 75px;
+    height: auto;
+}
+
+#footer-logo {
+    width: 85px;
+    height: auto;
+    padding-right: 22px;
+}
+
+.left-search-panel {
+    border: blueviolet 3px solid;
+    padding: 12px;
+}
+
+.left-search-panel-cities {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.left-search-panel-cities li {
+    border: rgb(206, 206, 206) 0.2px solid;
+    padding: 6px;
+}
+
+.left-search-panel-cities li:hover {
+    border: rgb(88, 88, 88) 0.2px solid;
+    -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08);
+    box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08);
+    font-size: 18.5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.right-detail-panel {
+    border: tomato 3px solid;
+    padding: 12px;
+}
+
+.current-weather-panel {
+    border: violet 3px solid;
+}
+
+.future-weather-panel {
+    border: crimson 3px solid;
+}
+
+.future-forecast-day {
+    border: olivedrab 3px solid;
+}
+
+ul li {
+    list-style: none;
+}
+
+.future-forecast-day {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer {
+    border-top: rgb(87, 86, 86) 2px solid;
+    background-color: grey;
+    padding: 16px;
+}
+
+a{
+    color: black;
 }
