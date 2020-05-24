@@ -1,31 +1,99 @@
+/* ANIMATIONS */
+
+.slide-right {
+    -webkit-animation: slide-right .5s cubic-bezier(.25, .46, .45, .94) both;
+    animation: slide-right .5s cubic-bezier(.25, .46, .45, .94) both
+}
+
+.slide-fwd-center {
+	-webkit-animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+
+@-webkit-keyframes slide-fwd-center {
+    0% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+    }
+    100% {
+      -webkit-transform: translateZ(160px);
+              transform: translateZ(160px);
+    }
+  }
+  @keyframes slide-fwd-center {
+    0% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+    }
+    100% {
+      -webkit-transform: translateZ(160px);
+              transform: translateZ(160px);
+    }
+  }
+  
+
+
+
+
+@-webkit-keyframes slide-right {
+    0% {
+        -webkit-transform: translateX(-100px);
+        transform: translateX(-100px)
+    }
+    100% {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px)
+    }
+}
+
+@keyframes slide-right {
+    0% {
+        -webkit-transform: translateX(-100px);
+        transform: translateX(-100px)
+    }
+    100% {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px)
+    }
+}
 
 /* IMAGES */
-*{
+
+* {
     letter-spacing: 1.5px;
+}
+
+.map {
+    height: 250px;
+    width: 300px;
+    border: white 2px solid;
+}
+
+#displayIcon {
+    display: none;
+    transform: scale(2);
 }
 
 #umbrella-logo {
     width: 75px;
     height: auto;
 }
+
 #footer-logo {
     width: 85px;
     height: auto;
     padding-right: 22px;
 }
 
-#weather-icon{
-
-    
-}
+#weather-icon {}
 
 .left-search-panel {
- 
     border: blueviolet 3px solid;
     padding: 12px;
 }
 
-.left-search-panel-form{
+.left-search-panel-form {
     margin-left: auto;
     margin-right: auto;
 }
@@ -38,26 +106,38 @@
 .left-search-panel-cities li {
     border: rgb(231, 230, 230) 0.2px solid;
     padding: 6px;
+     
 }
+ 
+
 
 .left-search-panel-cities li:hover {
     border: rgb(88, 88, 88) 0.2px solid;
-/*     -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08);
+    /*     -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08);
     box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08); */
     font-size: 18.5px;
     font-weight: 600;
     cursor: pointer;
+    text-overflow: ellipsis !important;
 }
 
 .right-detail-panel {
     border: tomato 3px solid;
     padding: 12px;
- 
 }
 
 .current-weather-panel {
     border: violet 3px solid;
     padding: 16px;
+}
+
+.current-weather-dashboard {
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+    padding: 26px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 10px 13px -7px #313131, 2px 35px 49px 43px rgba(0,0,0,0.03); 
+    box-shadow: 0px 10px 13px -7px #2e2e2e, 2px 35px 49px 43px rgba(0,0,0,0.03);
 }
 
 .future-weather-panel {
@@ -66,10 +146,9 @@
 
 .future-forecast-day {
     border: olivedrab 3px solid;
-   
 }
 
-.future-weather-panel-title{
+.future-weather-panel-title {
     padding: 12px;
 }
 
@@ -90,23 +169,18 @@ ul li {
     padding: 16px;
 }
 
-a{
+a {
     color: black;
 }
 
-@media (max-width: 580px){
-
-    .left-search-panel-cities li{
+@media (max-width: 580px) {
+    .left-search-panel-cities li {
         font-size: 10px;
     }
-
     .left-search-panel-cities li:hover {
         border: rgb(88, 88, 88) 0.2px solid;
-    /*     -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08);
+        /*     -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08);
         box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08); */
-   
-         
         cursor: pointer;
     }
-
 }
