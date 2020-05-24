@@ -1,17 +1,33 @@
+
+/* IMAGES */
+*{
+    letter-spacing: 1.5px;
+}
+
 #umbrella-logo {
     width: 75px;
     height: auto;
 }
-
 #footer-logo {
     width: 85px;
     height: auto;
     padding-right: 22px;
 }
 
+#weather-icon{
+
+    
+}
+
 .left-search-panel {
+ 
     border: blueviolet 3px solid;
     padding: 12px;
+}
+
+.left-search-panel-form{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .left-search-panel-cities {
@@ -20,14 +36,14 @@
 }
 
 .left-search-panel-cities li {
-    border: rgb(206, 206, 206) 0.2px solid;
+    border: rgb(231, 230, 230) 0.2px solid;
     padding: 6px;
 }
 
 .left-search-panel-cities li:hover {
     border: rgb(88, 88, 88) 0.2px solid;
-    -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08);
-    box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08);
+/*     -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08);
+    box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08); */
     font-size: 18.5px;
     font-weight: 600;
     cursor: pointer;
@@ -36,10 +52,12 @@
 .right-detail-panel {
     border: tomato 3px solid;
     padding: 12px;
+ 
 }
 
 .current-weather-panel {
     border: violet 3px solid;
+    padding: 16px;
 }
 
 .future-weather-panel {
@@ -48,6 +66,11 @@
 
 .future-forecast-day {
     border: olivedrab 3px solid;
+   
+}
+
+.future-weather-panel-title{
+    padding: 12px;
 }
 
 ul li {
@@ -57,6 +80,8 @@ ul li {
 .future-forecast-day {
     margin-left: auto;
     margin-right: auto;
+    padding: 12px;
+    margin-bottom: 12px;
 }
 
 .footer {
@@ -67,4 +92,21 @@ ul li {
 
 a{
     color: black;
+}
+
+@media (max-width: 580px){
+
+    .left-search-panel-cities li{
+        font-size: 10px;
+    }
+
+    .left-search-panel-cities li:hover {
+        border: rgb(88, 88, 88) 0.2px solid;
+    /*     -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08);
+        box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08); */
+   
+         
+        cursor: pointer;
+    }
+
 }

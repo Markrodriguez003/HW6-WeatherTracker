@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <!-- HEADER -->
     <div class="top-bar">
         <img src="assets/UmbrellaLogo.png" alt="Umbrella Logo" id="umbrella-logo">
         <div class="top-bar-left">
@@ -24,26 +25,29 @@
             <div class="grid-y small-12 medium-3 large-3 columns left-search-panel">
                 <!-- LEFT SIDE SEARCH PANEL -->
                 <h4>Search by city:</h4>
-                
-                <div class="grid-x">
-                    <div class="grid-y small-12 medium-8 large-8"> <input type="search"
-                            placeholder="Search city weather!"></div>
-                    <div class="grid-y small-12 medium-4 large-4"> <button type="button" class="button">Search</button>
+
+                <div class="grid-x left-search-panel-form">
+                    <div class="grid-y small-12 medium-8 large-8 "> <input type="search"
+                            placeholder="Search city weather!" id="citySearch"></div>
+                    <div class="grid-y small-12 medium-8 large-4"> <button type="button" class="button" id="searchBtn">Search</button>
                     </div>
                     <ul class="grid-x small-12 medium-12 large-12 left-search-panel-cities">
-                        <li class="grid-x small-2 medium-6 large-12" >Miami</li>
-                        <li class="grid-x small-2 medium-6 large-12">Austin</li>
-                        <li class="grid-x small-2 medium-6 large-12">Charlotte</li>
-                        <li class="grid-x small-2 medium-6 large-12">San Francisco</li>
-                        <li class="grid-x small-2 medium-6 large-12">Buffalo</li>
-                        <li class="grid-x small-2 medium-6 large-12">Seattle</li>
-                        <li class="grid-x small-2 medium-6 large-12">Akon</li>
-                        <li class="grid-x small-2 medium-6 large-12">Detroit</li>
-                        <li class="grid-x small-2 medium-6 large-12">Las Vegas</li>
-                        <li class="grid-x small-2 medium-6 large-12">St. Paul</li>
+                        <li class="grid-x small-2 medium-12 large-12">Miami</li>
+                        <li class="grid-x small-2 medium-12 large-12">Austin</li>
+                        <li class="grid-x small-2 medium-12 large-12">Boise</li>
+                        <li class="grid-x small-2 medium-12 large-12">Charlotte</li>
+                        <li class="grid-x small-2 medium-12 large-12">San Francisco</li>
+                        <li class="grid-x small-2 medium-12 large-12">Salt Lake City</li>
+                        <li class="grid-x small-2 medium-12 large-12">Buffalo</li>
+                        <li class="grid-x small-2 medium-12 large-12">Seattle</li>
+                        <li class="grid-x small-2 medium-12 large-12">Bismarck</li>
+                        <li class="grid-x small-2 medium-12 large-12">Denver</li>
+                        <li class="grid-x small-2 medium-12 large-12">Las Vegas</li>
+                        <li class="grid-x small-2 medium- large-12">Wichita</li>
+
                     </ul>
                 </div>
-                
+
             </div>
             <div class="grid-y small-12 medium-9 large-9 columns  right-detail-panel">
                 <!-- RIGHT SIDE WEATHER DETAIL PANEL -->
@@ -54,15 +58,14 @@
                             <div class="grid-y small-10 medium-10 large-10">
                                 <h4>Today's Forecast:</h4>
                             </div>
-                            <div class="grid-y small-2 medium-2 large-2">
-                                <img src="#" alt="current">
-                            </div>
                         </div>
                         <ul>
-                            <li>Temperature: <span id="current_temp"></span></li>
-                            <li>Humidity: <span id="current_humidity"></span> </li>
-                            <li>Wind Speed: <span id="current_wind"></span></li>
-                            <li>UV Index: <span id="current_UV"></span></li>
+                            <li><span id="current_description"></span></li>
+                            <li>Temperature: <span id="current_temp"> </span>&#x2109</li>
+                            <li>Humidity: <span id="current_humidity"></span> %</li>
+                            <li>Wind Speed: <span id="current_windSpeed"></span></li>
+                            <li>Wind Degree: <span id="current_windDeg"></span> &deg</li>
+                            <li>UV Index: <span id="current_UVI"></span></li>
                         </ul>
                     </div>
                     <div class="grid-x small-12 medium-12 large-12 future-weather-panel">
@@ -72,7 +75,7 @@
                             <h4 class="future-weather-panel-title">Future Forecasts:</h4>
                         </div>
 
-                        <div class="grid-y small-6 medium-2 large-2 future-forecast-day">
+                        <div class="grid-y small-6 medium-4 large-2 future-forecast-day">
                             <div class="card">
                                 <div class="card-divider">
                                     <div class="card-divider">
@@ -88,7 +91,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="grid-y small-6 medium-2 large-2 future-forecast-day">
+                        <div class="grid-y small-6 medium-4 large-2 future-forecast-day">
                             <div class="card">
                                 <div class="card-divider">
                                     <div class="card-divider">
@@ -104,7 +107,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="grid-y small-6 medium-2 large-2 future-forecast-day">
+                        <div class="grid-y small-6 medium-4 large-2 future-forecast-day">
                             <div class="card">
                                 <div class="card-divider">
                                     <div class="card-divider">
@@ -120,7 +123,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="grid-y small-6 medium-2 large-2 future-forecast-day">
+                        <div class="grid-y small-6 medium-4 large-2 future-forecast-day">
                             <div class="card">
                                 <div class="card-divider">
                                     <div class="card-divider">
@@ -136,7 +139,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="grid-y small-6 medium-2 large-2 future-forecast-day">
+                        <div class="grid-y small-6 medium-4 large-2 future-forecast-day">
                             <div class="card">
                                 <div class="card-divider">
                                     <div class="card-divider">
@@ -158,28 +161,32 @@
             </div>
         </div>
     </div>
-    </div>
+    <!--  </div> -->
 
     <br><br>
     <!-- FOOTER -->
-    <div class="footer"> 
-            <div class="grid-container">
-                <div class="grid-x">
-                    <div class="grid-y small-1 medium-1 large-1">
-                        <img src="assets/footerLogo.png" alt="Umbrella Logo" id="footer-logo">
-                    </div>
-                    <div class="grid-y small-4 medium-4 large-4">
-                        <h3 id="footer-header">About Weather App</h3>
-                        <p>We used <a href="https://openweathermap.org/api">OpenWeather Api</a> 
-                            & <a href="https://get.foundation/">Zurb Foundation CSS </a>  to build this site for you! Check back for more updates and features!
-                        </p>
-                    </div>
+    <!-- <div class="footer">
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="grid-y small-1 medium-1 large-1">
+                    <img src="assets/footerLogo.png" alt="Umbrella Logo" id="footer-logo">
+                </div>
+                <div class="grid-y small-4 medium-4 large-4">
+                    <h3 id="footer-header">About Weather App</h3>
+                    <p>We used <a href="https://openweathermap.org/api">OpenWeather Api</a>
+                        & <a href="https://get.foundation/">Zurb Foundation CSS </a> to build this site for you! Check
+                        back for more updates and features!
+                    </p>
                 </div>
             </div>
-       
-    </div>
+        </div>
+    </div> -->
+    <!-- END OF FOOTER -->
 
     <!-- SCRIPTS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
         integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
     <script src="script.js"></script>

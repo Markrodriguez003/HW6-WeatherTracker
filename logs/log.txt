@@ -1,0 +1,24 @@
+   API_call = (SEARCH_CITY) => {
+      const SEARCH_URL = API_CURRENT_URL + SEARCH_CITY + API_KEY;
+      $.ajax({
+         url: SEARCH_URL,
+         method: "GET"
+
+      }).then((response) => {
+         console.log(response);
+         $("#current_description").text(response.weather[0].description);
+         $("#current_temp").text(getFahrenheit(response.main.temp));
+         $("#current_humidity").text(response.main.humidity);
+         $("#current_windSpeed").text(response.wind.speed);
+         $("#current_windDeg").text(response.wind.deg);
+
+         const UVI_URL = `https://api.openweathermap.org/data/2.5/uvi?${API_KEY}&lat=${response.coord.lat}&lon=${response.coord.lon}`;
+         /* https://openweathermap.org/api/uvi  */
+         $.ajax({
+            url: UVI_URL,
+            method: "GET"
+         }).then((uvi) => {
+            $("#current_UVI").text(uvi.value);
+         })
+      }); 
+   }
