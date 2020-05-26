@@ -86,6 +86,12 @@
     padding-right: 22px;
 }
 
+#current_UVI{
+    color:white;
+    background: green;
+    padding: 4px;
+}
+
 #weather-icon {}
 
 .left-search-panel {
