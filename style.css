@@ -98,20 +98,26 @@
     margin-right: auto;
 }
 
-.left-search-panel-cities {
+.left-search-panel-cities, .left-search-panel-search-history {
     margin-right: auto;
     margin-left: auto;
+    
 }
 
-.left-search-panel-cities li {
+.left-search-panel-cities li, .left-search-panel-search-history li{
     border: rgb(231, 230, 230) 0.2px solid;
     padding: 6px;
      
 }
+
+.left-search-panel-cities li:nth-child(even), .left-search-panel-search-history li:nth-child(even){
+    background-color: rgb(230, 230, 230);
+
+}
  
 
 
-.left-search-panel-cities li:hover {
+.left-search-panel-cities li:hover, .left-search-panel-search-history li:hover {
     border: rgb(88, 88, 88) 0.2px solid;
     /*     -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08);
     box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 3px 2px 47px 19px rgba(0, 0, 0, 0.08); */
@@ -120,6 +126,8 @@
     cursor: pointer;
     text-overflow: ellipsis !important;
 }
+
+
 
 .right-detail-panel {
     border: tomato 3px solid;
