@@ -7,7 +7,7 @@ $(document).ready(() => {
    /* API CALL JSON INFO */
    const API_KEY = "&appid=dd53e65967b5b733950420e53babdfc5";
    const API_CURRENT_URL = "https://api.openweathermap.org/data/2.5/weather?q="  /* https://openweathermap.org/current */
-   const API_FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast?q=" /* https://openweathermap.org/forecast5 */
+   const API_FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" /* https://openweathermap.org/forecast5 */
    let SEARCH_CITY;
    let userHistory = [];
    localStorage.setItem("LS_userHistory", "");
@@ -19,14 +19,14 @@ $(document).ready(() => {
       enableHighAccuracy: true,
       timeout: 5000,
       maximumAge: 0
-    };
-    
-    successGeo = (pos) => { 
+   };
+
+   successGeo = (pos) => {
       console.log(`Latitude : ${pos.coords.latitude}`);
       console.log(`Longitude: ${pos.coords.longitude}`);
 
       /* api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={your api key} */
-      PG_LOAD_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${Math.round(pos.coords.latitude,2)}&lon=${Math.round(pos.coords.longitude,2)}${API_KEY}`
+      PG_LOAD_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${Math.round(pos.coords.latitude, 2)}&lon=${Math.round(pos.coords.longitude, 2)}${API_KEY}`
 
       $.ajax({
          url: PG_LOAD_URL,
@@ -88,12 +88,11 @@ $(document).ready(() => {
                }
             });
 
-            const SEARCH_FUTURE_URL = API_FORECAST_URL + SEARCH_CITY + API_KEY;
+            let SEARCH_FUTURE_URL = API_FORECAST_URL + SEARCH_CITY + "&cnt=5" + API_KEY;
             $.ajax({
                url: SEARCH_FUTURE_URL,
                method: "GET",
                success: (future_response) => {
-
 
                   let futureWeather_ObjArr = [];
                   let futureWeather_Obj = {
@@ -114,34 +113,6 @@ $(document).ready(() => {
                      futureWeather_Obj.humidity = future_response.list[i].main.humidity;
                      futureWeather_ObjArr.push(futureWeather_Obj);
                   }
-
-                  /*   console.log(futureWeather_ObjArr); */
-
-                  /* console.log(future_response);
-                  console.log(future_response.list[0].dt_txt);
-                  console.log(future_response.list[0].weather[0].description); 
-                  console.log(future_response.list[0].weather[0].icon); 
-                  console.log(future_response.list[0].main.temp); 
-                  console.log(future_response.list[0].main.humidity); */
-
-
-
-                  /*   console.log($(`.card-section ul li span`)[0].innerText = `${future_response.list[`${0}`].dt_txt}`);
-                    console.log($(`.card-section ul li span`)[1].innerText = `${future_response.list[`${0}`].weather[0].description}`);
-                    console.log($(`.card-section img`)[0]);
-                    console.log($(`.card-section ul li span`)[3]);
-                    console.log($(`.card-section ul li span`)[4]);
-                 */
-                  /* for (let i = 0; i <= 15; i++) {
-                       console.log($(`.card-section ul li`)[i]); 
-                      $(`.card-section ul li`)[i].text(future_response.list[`${i}`].dt_txt);
-                        $(`.card-section ul li`)[i].text(future_response.list[`${i}`].weather[0].description);
-                        $(`.card-section ul li`)[i + 1].attr("src", `http://openweathermap.org/img/w/${future_response.list[`${i}`].weather[0].icon}.png`);
-                        $(`.card-section ul li`)[i + 2].text(getFahrenheit(future_response.list[`${i}`].main.temp));
-                        $(`.card-section ul li`)[i + 3].text(future_response.list[`${i}`].main.humidity);
-                        i+=4; 
-                  }*/
-
                }
             });
 
@@ -158,18 +129,18 @@ $(document).ready(() => {
          }
       })
 
-    }
-    
-    error = (err) => {
+   }
+
+   error = (err) => {
       console.log(`Error -> (${err.code}): ${err.message}`);
-    }
-    
-    displayUsersCoords = () => {
+   }
+
+   displayUsersCoords = () => {
       navigator.geolocation.getCurrentPosition(successGeo, error, options);
-    }
+   }
 
 
-    displayUsersCoords();
+   displayUsersCoords();
 
 
 
@@ -434,13 +405,13 @@ $(document).ready(() => {
                }
             });
 
-            const SEARCH_FUTURE_URL = API_FORECAST_URL + SEARCH_CITY + API_KEY;
+            let SEARCH_FUTURE_URL = `https://api.openweathermap.org/data/2.5/forecast?q=` + SEARCH_CITY + "&cnt=5" + API_KEY;
             $.ajax({
                url: SEARCH_FUTURE_URL,
                method: "GET",
                success: (future_response) => {
 
-
+                  console.log(future_response)
                   let futureWeather_ObjArr = [];
                   let futureWeather_Obj = {
                      date: "",
@@ -459,10 +430,11 @@ $(document).ready(() => {
                      futureWeather_Obj.temp = future_response.list[i].main.temp;
                      futureWeather_Obj.humidity = future_response.list[i].main.humidity;
                      futureWeather_ObjArr.push(futureWeather_Obj);
+                     
                   }
 
-                  /*   console.log(futureWeather_ObjArr); */
-
+                    /* console.log(futureWeather_ObjArr);
+ */
                   /* console.log(future_response);
                   console.log(future_response.list[0].dt_txt);
                   console.log(future_response.list[0].weather[0].description); 
@@ -506,14 +478,10 @@ $(document).ready(() => {
 
    } // api call function end
 
-
-
    /* TEMPERATURE CONVERSION */
    getFahrenheit = (t) => {
       /* ° F = 1.8(K - 273) + 32 */
       tx = Math.round(1.8 * (t - 273) + 32);
       return tx;
    }
-
-
 }) // DOCUMENT READY END
