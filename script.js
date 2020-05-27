@@ -1,18 +1,68 @@
 $(document).ready(() => {
 
-   /*  */
-
-   /* API URL CALL -> api.openweathermap.org/data/2.5/forecast?q={city name}&appid={your api key} */
-   /* EXAMPLE: https://samples.openweathermap.org/data/2.5/forecast?id=524901&appid=439d4b804bc8187953eb36d2a8c26a02  */
    /* API CALL JSON INFO */
    const API_KEY = "&appid=dd53e65967b5b733950420e53babdfc5";
-   const API_CURRENT_URL = "https://api.openweathermap.org/data/2.5/weather?q="  /* https://openweathermap.org/current */
-   const API_FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" /* https://openweathermap.org/forecast5 */
+   const API_CURRENT_URL = "https://api.openweathermap.org/data/2.5/weather?q="
+   const API_FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast?q="
    let SEARCH_CITY;
    let userHistory = [];
    localStorage.setItem("LS_userHistory", "");
-   /* grab user's location with window? then call APICall() to display temp data automatically when user visits page */
 
+
+   display_future_forecasts = () => {
+      /* SETS 5 DAY FORECAST */
+      let SEARCH_FUTURE_URL = API_FORECAST_URL + SEARCH_CITY + API_KEY;
+      $.ajax({
+         url: SEARCH_FUTURE_URL,
+         method: "GET",
+         success: (future_response) => {
+            console.log(`SEARCH URL: ${SEARCH_FUTURE_URL}`);
+            let holdTime;
+            let holdDate;
+            let setDate = "";
+            $(".future-weather-cards").empty();
+            /* 2020-05-27 12:00:00 */  /* 3 */
+            let y = 0;
+            for (let i = 0; i < future_response.list.length; i++) {
+               
+               holdTime = future_response.list[i].dt_txt.slice(11, 13);
+               holdDate = future_response.list[i].dt_txt.slice(0, 10);
+                
+                
+               if (holdTime === "12") {
+                  setDate = future_response.list[i].dt_txt;
+                  console.log(future_response.list[i]);
+                  console.log(`THESE ARE THE FORECAST DATES: ${setDate}`);
+                  
+                  y = y + 1; 
+                  $(".future-weather-cards").append(
+
+                    ` <div class="grid-y small-6 medium-4 large-2 future-forecast-day">
+                      <div class="card">
+                          <div class="card-divider">
+                              <h6>DAY-${y}</h6> 
+                          </div>
+                          <div class="card-section">
+                              <ul>
+                                  <li><span class="future-date">${future_response.list[`${i}`].dt_txt}</span></li>
+                                  <li><span class="future-weather-description">${future_response.list[`${i}`].weather[0].description}</span></li>
+                                  <li><img src=${`https://openweathermap.org/img/w/${future_response.list[`${i}`].weather[0].icon}.png`} alt="" class="future-weather-icon"></li>
+                                  <li>Temperature: <span id="future_temp">${getFahrenheit(future_response.list[`${i}`].main.temp)}</span></li>
+                                  <li>Humidity: <span id="future_humidity">${future_response.list[`${i}`].main.humidity}</span> </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>`
+                  
+                     
+                  ) 
+                     
+               
+               }
+            }
+         }
+      });
+ }
 
    /* LOADS USER LOCATION AND DISPLAY WEATHER  */
    let options = {
@@ -32,7 +82,7 @@ $(document).ready(() => {
          url: PG_LOAD_URL,
          method: "GET",
          success: (response) => {
-            /*       console.log(response); */
+
             $(".map").empty();
             $("#current_description").text(response.weather[0].description);
             $("#weatherIcon").attr("src", `http://openweathermap.org/img/w/${response.weather[0].icon}.png`);
@@ -40,12 +90,9 @@ $(document).ready(() => {
 
             if (response.weather[0].icon[2] === "d") {
                $(".right-detail-panel").css({ "background-image": "url(assets/dayTimeBG.png)", "background-repeat": "no-repeat", "background-size": "cover" });
-               /*             $(".right-detail-panel").class("slide-fwd-center"); */
-
             } else if (response.weather[0].icon[2] === "n") {
                $(".right-detail-panel").css({ "background-image": "url(assets/nightTimeBG.png)", "background-repeat": "no-repeat", "background-size": "cover" });
                $(".right-detail-panel").css("color", "white");
-               /*    $(".right-detail-panel").class("slide-fwd-center"); */
 
             } else {
                $(".right-detail-panel").css("background-color", "tomato");
@@ -88,35 +135,7 @@ $(document).ready(() => {
                }
             });
 
-            let SEARCH_FUTURE_URL = API_FORECAST_URL + SEARCH_CITY + "&cnt=5" + API_KEY;
-            $.ajax({
-               url: SEARCH_FUTURE_URL,
-               method: "GET",
-               success: (future_response) => {
-
-                  let futureWeather_ObjArr = [];
-                  let futureWeather_Obj = {
-                     date: "",
-                     icon: "",
-                     descrip: "",
-                     temp: "",
-                     humidity: ""
-                  };
-
-                  /*       console.log(future_response); */
-
-                  for (let i = 0; i < 5; i++) {
-                     futureWeather_Obj.date = future_response.list[i].dt_txt;
-                     futureWeather_Obj.icon = future_response.list[i].weather[0].icon;
-                     futureWeather_Obj.descrip = future_response.list[i].weather[0].description;
-                     futureWeather_Obj.temp = future_response.list[i].main.temp;
-                     futureWeather_Obj.humidity = future_response.list[i].main.humidity;
-                     futureWeather_ObjArr.push(futureWeather_Obj);
-                  }
-               }
-            });
-
-
+            display_future_forecasts();
             city_pageLoader();
          },
          error: () => {
@@ -125,10 +144,8 @@ $(document).ready(() => {
             $("#citySearch").css("background-color", "rgb(255, 98, 98)");
             $("#citySearch").val("");
             $("#citySearch").attr("placeholder", "Enter a city!");
-
          }
       })
-
    }
 
    error = (err) => {
@@ -139,11 +156,7 @@ $(document).ready(() => {
       navigator.geolocation.getCurrentPosition(successGeo, error, options);
    }
 
-
    displayUsersCoords();
-
-
-
 
    /* LOADS USER HISTORY */
    loadHistory = () => {
@@ -155,8 +168,6 @@ $(document).ready(() => {
          console.log(`Local variable is empty: ${parsed_LS}`);
       } else {
          parsed_LS_F = JSON.parse(localStorage["LS_userHistory"]);
-         console.log(`The array is filled: ${parsed_LS_F} & it's length is ${parsed_LS_F.length}`);
-
 
          if (parsed_LS_F.length < 5) {
             for (let i = 0; i < parsed_LS_F.length; i++) {
@@ -179,7 +190,6 @@ $(document).ready(() => {
          }
       }
    }
-
 
    /* RANDOM CITY GENERATOR  */
    city_pageLoader = () => {
@@ -305,14 +315,12 @@ $(document).ready(() => {
       $("#citySearch").val(e.target.innerText.toString());
 
    })
-
    /* GRABS CLICKED SEARCH HISTORY CITY AND LOADS IT IN SEARCH FIELD */
    $(document).on("click", ".left-search-panel-search-history li", (e) => {
       e.stopPropagation();
       $("#citySearch").empty();
       $("#citySearch").val(e.target.innerText.toString());
    })
-
    city_pageLoader();
 
    /* USER PRESSES SEARCH BUTTON */
@@ -324,7 +332,6 @@ $(document).ready(() => {
          userHistory.unshift(SEARCH_CITY);
          console.log(userHistory);
          localStorage.setItem("LS_userHistory", JSON.stringify(userHistory));
-
       }
 
       API_call(SEARCH_CITY);
@@ -347,7 +354,6 @@ $(document).ready(() => {
          url: SEARCH_URL,
          method: "GET",
          success: (response) => {
-            /*       console.log(response); */
             $(".map").empty();
             $("#current_description").text(response.weather[0].description);
             $("#weatherIcon").attr("src", `http://openweathermap.org/img/w/${response.weather[0].icon}.png`);
@@ -355,17 +361,12 @@ $(document).ready(() => {
 
             if (response.weather[0].icon[2] === "d") {
                $(".right-detail-panel").css({ "background-image": "url(assets/dayTimeBG.png)", "background-repeat": "no-repeat", "background-size": "cover" });
-               /*             $(".right-detail-panel").class("slide-fwd-center"); */
 
             } else if (response.weather[0].icon[2] === "n") {
                $(".right-detail-panel").css({ "background-image": "url(assets/nightTimeBG.png)", "background-repeat": "no-repeat", "background-size": "cover" });
                $(".right-detail-panel").css("color", "white");
-               /*    $(".right-detail-panel").class("slide-fwd-center"); */
-
-
             } else {
                $(".right-detail-panel").css("background-color", "tomato");
-
             }
 
             $("#current_temp").text(getFahrenheit(response.main.temp));
@@ -405,65 +406,8 @@ $(document).ready(() => {
                }
             });
 
-            let SEARCH_FUTURE_URL = `https://api.openweathermap.org/data/2.5/forecast?q=` + SEARCH_CITY + "&cnt=5" + API_KEY;
-            $.ajax({
-               url: SEARCH_FUTURE_URL,
-               method: "GET",
-               success: (future_response) => {
 
-                  console.log(future_response)
-                  let futureWeather_ObjArr = [];
-                  let futureWeather_Obj = {
-                     date: "",
-                     icon: "",
-                     descrip: "",
-                     temp: "",
-                     humidity: ""
-                  };
-
-                  /*       console.log(future_response); */
-
-                  for (let i = 0; i < 5; i++) {
-                     futureWeather_Obj.date = future_response.list[i].dt_txt;
-                     futureWeather_Obj.icon = future_response.list[i].weather[0].icon;
-                     futureWeather_Obj.descrip = future_response.list[i].weather[0].description;
-                     futureWeather_Obj.temp = future_response.list[i].main.temp;
-                     futureWeather_Obj.humidity = future_response.list[i].main.humidity;
-                     futureWeather_ObjArr.push(futureWeather_Obj);
-                     
-                  }
-
-                    /* console.log(futureWeather_ObjArr);
- */
-                  /* console.log(future_response);
-                  console.log(future_response.list[0].dt_txt);
-                  console.log(future_response.list[0].weather[0].description); 
-                  console.log(future_response.list[0].weather[0].icon); 
-                  console.log(future_response.list[0].main.temp); 
-                  console.log(future_response.list[0].main.humidity); */
-
-
-
-                  /*   console.log($(`.card-section ul li span`)[0].innerText = `${future_response.list[`${0}`].dt_txt}`);
-                    console.log($(`.card-section ul li span`)[1].innerText = `${future_response.list[`${0}`].weather[0].description}`);
-                    console.log($(`.card-section img`)[0]);
-                    console.log($(`.card-section ul li span`)[3]);
-                    console.log($(`.card-section ul li span`)[4]);
-                 */
-                  /* for (let i = 0; i <= 15; i++) {
-                       console.log($(`.card-section ul li`)[i]); 
-                      $(`.card-section ul li`)[i].text(future_response.list[`${i}`].dt_txt);
-                        $(`.card-section ul li`)[i].text(future_response.list[`${i}`].weather[0].description);
-                        $(`.card-section ul li`)[i + 1].attr("src", `http://openweathermap.org/img/w/${future_response.list[`${i}`].weather[0].icon}.png`);
-                        $(`.card-section ul li`)[i + 2].text(getFahrenheit(future_response.list[`${i}`].main.temp));
-                        $(`.card-section ul li`)[i + 3].text(future_response.list[`${i}`].main.humidity);
-                        i+=4; 
-                  }*/
-
-               }
-            });
-
-
+            display_future_forecasts();
             city_pageLoader();
          },
          error: () => {
@@ -475,6 +419,8 @@ $(document).ready(() => {
 
          }
       })
+
+      
 
    } // api call function end
 
