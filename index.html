@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
         integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Tracker</title>
@@ -12,11 +13,8 @@
 
 <body>
     <!-- HEADER -->
-    <div class="top-bar">
-        <img src="assets/UmbrellaLogo.png" alt="Umbrella Logo" id="umbrella-logo">
-        <div class="top-bar-left">
-            <h1>WEATHER FORECAST</h1>
-        </div>
+    <div class="header ">
+            <h1 id="mainHeaderTitle"><img src="assets/UmbrellaLogo.png" alt="Umbrella Logo" id="umbrella-logo"> WEATHER FORECAST TRACKER</h1>
     </div>
 
     <!-- MAIN CONTENT CONTAINER -->
@@ -65,17 +63,17 @@
                     <div class="current-weather-details">
                         <div class="grid-x small-12 medium-12 large-12 current-weather-dashboard">
                             <div class="grid-y small-10 medium-6 large-6">
-                                <h4>Today's Forecast: <img id="weatherIcon" src="" alt="Current Weather Icon"></h4>
+                                <h4>Today's Forecast: <img id="weatherIcon" src="" alt="Current Weather Icon"></h4> 
                                 <ul>
-                                    <li><span id="current_description"></span></li>
-                                    <li>Temperature: <span id="current_temp"> </span>&#x2109</li>
-                                    <li>Humidity: <span id="current_humidity"></span> %</li>
-                                    <li>Wind Speed: <span id="current_windSpeed"></span></li>
-                                    <li>Wind Degree: <span id="current_windDeg"></span> &deg</li>
-                                    <li>UV Index: <span id="current_UVI"></span></li>
+                                    <li> <em> <span id="current_description"></em></span></li>
+                                    <li> <strong>Temperature:</strong> <span id="current_temp"> </span>&#x2109</li>
+                                    <li><strong>Humidity: </strong><span id="current_humidity"></span> %</li>
+                                    <li><strong>Wind Speed:</strong> <span id="current_windSpeed"></span></li>
+                                    <li><strong>Wind Degree:</strong> <span id="current_windDeg"></span> &deg</li>
+                                    <li><strong>UV Index:</strong> <span id="current_UVI"></span></li>
                                 </ul>
                             </div>
-                            <div class="grid-y small-12 medium-6 large-6">
+                            <div class="grid-y small-12 medium-12 large-6">
                                 <div class="map" id="map"></div>
                             </div>
                         </div><br>
